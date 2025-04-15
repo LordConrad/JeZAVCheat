@@ -37,10 +37,8 @@ def main_window():
   First_word_waiting = False
 
   Writing_Textbox = customtkinter.CTkTextbox(c, width=width*0.75, height=height*0.65,font=("Courier New",13,"bold"))
-  Delay_Textbox = customtkinter.CTkTextbox(c, font=("Arial",30,"bold"), width=100,height=1)
-  Speed_Textbox = customtkinter.CTkTextbox(c, font=("Arial",30,"bold"), width=60,height=1)
-  Character_counter = customtkinter.CTkTextbox(c, font=("Arial",30,"bold"), width=150,height=1)
-  Delay_Textbox.insert("1.0","2")
+  Speed_Textbox = customtkinter.CTkTextbox(c, font=("Arial",30,"bold"), width=60,height=3)
+  Character_counter = customtkinter.CTkTextbox(c, font=("Arial",30,"bold"), width=250,height=1)
   Speed_Textbox.insert("1.0",random.randint(10,25))
   
   Title_Text = customtkinter.CTkLabel(c,text="JeZAVcheat",font=("Arial",50,"bold"))
@@ -49,26 +47,22 @@ def main_window():
       global filename
       global File
       filetypes = (
-          ('Všechny soubory', '*.*'),
-          ('PNG soubory', '*.png')
+          ('All files', '*.*'),
+          ('PNG files', '*.png')
           
       )
-      File_Textbox.delete(0, "End_Counter")  # Vymazání původního textu
+      File_Textbox.delete(0, "end")  # Vymazání původního textu
       filename = fd.askopenfilename(
-          title='Otevřít obrázek',
+          title='Scan image',
           filetypes=filetypes)
       File_Textbox.insert(0,filename)
-      print("letsgou")
       File = filename
       image_path = filename
       img = cv2.imread(image_path)
-      print("letsgou")
       # instance text detector
       reader = easyocr.Reader(['cs'], gpu=False)
       # detect text on image
-      print("letsgou")
       Text_from_Image = reader.readtext(img, detail=0,paragraph=True)
-      print("letsgou")
       text = " ".join(Text_from_Image)
       global Text_to_write
       Text_to_write = text
@@ -83,8 +77,6 @@ def main_window():
   def potvrdit():
       global Text_to_be_written
       global Randomizer
-      global Character_typing_delay
-      Character_typing_delay = float(Delay_Textbox.get("1.0","end-1c"))
       Text_to_be_written = Writing_Textbox.get("1.0","end-1c")
       Randomizer = int(Speed_Textbox.get("1.0","end-1c"))
       Character_counter.delete("1.0","end")
@@ -485,38 +477,33 @@ def main_window():
     if First_word_waiting == True:
        keyboard.wait("space")
        auto_type()
-  
-  keyboard.add_hotkey("f2",Write)
 
-  btnpotvrdit = customtkinter.CTkButton(c,text="Potvrdit",command=potvrdit)
-  btnpsat = customtkinter.CTkButton(c,text="Psát (F2)",command=Write)
-  btnexit = customtkinter.CTkButton(c,text="Ukončit",command=exit)
-  btnvycistit = customtkinter.CTkButton(c,text="Vyčistit pole",command=vycistit)
-  btnmez = customtkinter.CTkButton(c,text="Odstranit mezery",command=mezery)
-  btnopak = customtkinter.CTkButton(c,text="Převrátit pořadí",command=prevratit)
+  btnpotvrdit = customtkinter.CTkButton(c,text="Confirm",command=potvrdit)
+  btnpsat = customtkinter.CTkButton(c,text="Type",command=Write)
+  btnexit = customtkinter.CTkButton(c,text="Exit",command=exit)
+  btnvycistit = customtkinter.CTkButton(c,text="Clear",command=vycistit)
+  btnmez = customtkinter.CTkButton(c,text="Cut spaces",command=mezery)
+  btnopak = customtkinter.CTkButton(c,text="Reverse",command=prevratit)
   File_Textbox = customtkinter.CTkEntry(c, width=135,height=1,state="normal")
-  delayvyber = customtkinter.CTkLabel(c,text="Začátek psaní (s)")
-  znakytext = customtkinter.CTkLabel(c,text="Počet znaků")
-  rychlostvyber = customtkinter.CTkLabel(c,text="Rychlost (od - do)")
-  btnvyber = customtkinter.CTkButton(c,text="Vybrat obrázek",command=vybratobr)
+  znakytext = customtkinter.CTkLabel(c,text="Character counter")
+  Speed_Text = customtkinter.CTkLabel(c,text="Speed")
+  btnvyber = customtkinter.CTkButton(c,text="Scan from picture",command=vybratobr)
 
 
-  File_Textbox.place(x=width*0.83,y=height*0.20)
-  btnvyber.place(x=width*0.83,y=height*0.25)
-  btnvycistit.place(x=width*0.83,y=height*0.35)
-  btnmez.place(x=width*0.83,y=height*0.40)
-  btnopak.place(x=width*0.83,y=height*0.45)
-  btnpsat.place(x=width*0.83,y=height*0.70)
-  btnpotvrdit.place(x=width*0.83,y=height*0.65)
-  btnexit.place(x=width*0.83,y=height*0.85)
+  File_Textbox.place(x=width*0.88,y=height*0.20)
+  btnvyber.place(x=width*0.88,y=height*0.25)
+  btnvycistit.place(x=width*0.88,y=height*0.35)
+  btnmez.place(x=width*0.88,y=height*0.40)
+  btnopak.place(x=width*0.88,y=height*0.45)
+  btnpsat.place(x=width*0.88,y=height*0.70)
+  btnpotvrdit.place(x=width*0.88,y=height*0.65)
+  btnexit.place(x=width*0.88,y=height*0.80)
   Title_Text.place(x=width/2-width/10,y=0)
   Writing_Textbox.place(x=width/100,y=height*0.2)
-  Delay_Textbox.place(x=width*0.02,y=height*0.02)
-  Speed_Textbox.place(x=width*0.27,y=height*0.02)
-  Character_counter.place(x=width*0.65,y=height*0.02)
-  znakytext.place(x=width*0.65,y=height*0.1)
-  delayvyber.place(x=width*0.02,y=height*0.1)
-  rychlostvyber.place(x=width*0.14,y=height*0.1)
+  Speed_Textbox.place(x=width*0.02,y=height*0.02)
+  Character_counter.place(x=width*0.85,y=height*0.02)
+  znakytext.place(x=width*0.90,y=height*0.1)
+  Speed_Text.place(x=width*0.02,y=height*0.1)
 
   c.mainloop()
 def typing_analyzer():
