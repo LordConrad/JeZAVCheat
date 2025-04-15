@@ -5,7 +5,7 @@
 + You must write first and last letter yourself. If you type first word and press space after this word program will automaticaly continue writing your text to the second to last word.
 + If ZAV detects bot typing STOP use this app immediately.
 
-### *Version 1.0*
+### *v0.0.1*
 ![Popis obrázku](/images/scrn-v1.png)
 #### - Developed on *Python 3.12.9*
 
