@@ -1,9 +1,9 @@
 # JeZAVCheat
 ## Scanner and Writer for ZAV written in python.
-+ My project is made for students who is annoyed of ZAV typing on keyboard
++ My project is made for students who are annoyed of ZAV typing on keyboard
 + You can customize your text many ways
 + You must write first and last letter yourself. If you type first word and press space after this word program will automaticaly continue writing your text to the second to last word.
-+ If ZAV detects bot typing STOP use this app immediately.
++ If ZAV detects bot typing STOP using this app immediately.
 
 ### *v0.0.1*
 ![Popis obrázku](/images/scrn-v1.png)
